@@ -1,0 +1,163 @@
+
+<div class="class1_header class1_instrument">
+    <span>{{selInstrument.instrument}}</span>
+</div>
+<div class="class1_header class1_name">
+    <span>{{selInstrument.name}}</span>
+</div>
+<div class="class1_header class1_name">
+    <span>Delivery: <strong> {{selInstrument.deliveryMonth}} </strong></span>
+</div>
+<div class="class1_header class1_name">
+    <span>First notice: <strong> {{selInstrument.strFirstNotice}} </strong></span>
+</div>
+<div class="class1_header class1_name">
+    <span>Expiration: <strong> {{selInstrument.strExpiration}} </strong></span>
+</div>
+<div class="class1_header">
+    <span>Tick size: {{selInstrument.tickSize}}</span>
+</div>
+<hr>
+
+
+<div class="clr-row">
+    <div class="clr-col-4">
+      <button class="btn btn-primary  btn-block" [disabled] = "txtSaved" (click) = "onSaveLevels()">Save levels</button>
+      <form clrForm>
+        <table class="table">
+            <caption>
+              Define levels value
+            </caption>
+            <thead>
+              <tr>
+                <th>Level</th>
+                <th>Weight</th>
+                <th>Desc</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input type="text" class="level" [allowNegativeNumbers]="true" name ="ValueLevel_1" [(ngModel)]="levels.valueLevel_1" mask="" (change)="dataChange()"></td>
+                <td><input type="range" calss="clsRangeWT"  name="weight1" max="2" min="0" step="1" [(ngModel)]="levels.weightLevel_1" (change)="dataChange()"></td>
+                <button type="button" [disabled] = "isEmptyDescription(1)" name="desc_1" class={{isEmptyDescription_0(1)}} aria-label="settings" (click)="clickLevelDescription(1)">
+                    <clr-icon shape = "cog" ></clr-icon>
+                  </button>                
+              </tr>
+              <tr>
+                <td><input type="text" class="level" [allowNegativeNumbers]="true" name ="ValueLevel_2" [(ngModel)]="levels.valueLevel_2" mask="" (change)="dataChange()"></td>
+                <td><input type="range" calss="clsRangeWT"  name="weight2" max="2" min="0" step="1" [(ngModel)]="levels.weightLevel_2" (change)="dataChange()"></td>
+                <button type="button"  [disabled] = "isEmptyDescription(2)" name="desc_2" class={{isEmptyDescription_0(2)}} aria-label="settings" (click)="clickLevelDescription(2)">
+                    <clr-icon shape = "cog"></clr-icon>
+                  </button>                
+              </tr>
+              <tr>
+                <td><input type="text" class="level" [allowNegativeNumbers]="true" name ="ValueLevel_3" [(ngModel)]="levels.valueLevel_3" mask="" (change)="dataChange()"></td>
+                <td><input type="range" calss="clsRangeWT"  name="weight3" max="2" min="0" step="1" [(ngModel)]="levels.weightLevel_3" (change)="dataChange()"></td>
+                <button type="button"  [disabled] = "isEmptyDescription(3)" name="desc_3" class={{isEmptyDescription_0(3)}} aria-label="settings" (click)="clickLevelDescription(3)">
+                    <clr-icon shape="cog"></clr-icon>
+                  </button>                
+              </tr>
+              <tr>
+                <td><input type="text" class="level" [allowNegativeNumbers]="true" name ="ValueLevel_4" [(ngModel)]="levels.valueLevel_4" mask="" (change)="dataChange()"></td>
+                <td><input type="range" calss="clsRangeWT"  name="weight4" max="2" min="0" step="1" [(ngModel)]="levels.weightLevel_4" (change)="dataChange()"></td>
+                <button type="button"  [disabled] = "isEmptyDescription(4)" name="desc_4" class={{isEmptyDescription_0(4)}} aria-label="settings" (click)="clickLevelDescription(4)">
+                    <clr-icon shape="cog"></clr-icon>
+                  </button>                
+              </tr>
+              <tr>
+                <td><input type="text" class="level" [allowNegativeNumbers]="true" name ="ValueLevel_5" [(ngModel)]="levels.valueLevel_5" mask="" (change)="dataChange()"></td>
+                <td><input type="range" calss="clsRangeWT"  name="weight5" max="2" min="0" step="1" [(ngModel)]="levels.weightLevel_5" (change)="dataChange()"></td>
+                <button type="button" [disabled] = "isEmptyDescription(5)"  name="desc_5" class={{isEmptyDescription_0(5)}} aria-label="settings" (click)="clickLevelDescription(5)">
+                    <clr-icon shape="cog"></clr-icon>
+                  </button>                
+              </tr>
+
+              <tr>
+                <td><input type="text" class="level" [allowNegativeNumbers]="true" name ="ValueLevel_6" [(ngModel)]="levels.valueLevel_6" mask="" (change)="dataChange()"></td>
+                <td><input type="range" calss="clsRangeWT"  name="weight6" max="2" min="0" step="1" [(ngModel)]="levels.weightLevel_6" (change)="dataChange()"></td>
+                <button type="button"  [disabled] = "isEmptyDescription(6)"  name="desc_6" class={{isEmptyDescription_0(6)}} aria-label="settings" (click)="clickLevelDescription(6)">
+                    <clr-icon shape="cog"></clr-icon>
+                  </button>                
+              </tr>
+              <tr>
+                <td><input type="text" class="level" [allowNegativeNumbers]="true" name ="ValueLevel_7" [(ngModel)]="levels.valueLevel_7" mask="" (change)="dataChange()"></td>
+                <td><input type="range" calss="clsRangeWT"  name="weight7" max="2" min="0" step="1" [(ngModel)]="levels.weightLevel_7" (change)="dataChange()"></td>
+                <button type="button"  [disabled] = "isEmptyDescription(7)"  name="desc_7" class={{isEmptyDescription_0(7)}} aria-label="settings" (click)="clickLevelDescription(7)">
+                    <clr-icon shape="cog"></clr-icon>
+                  </button>                
+              </tr>
+              <tr>
+                <td><input type="text" class="level" [allowNegativeNumbers]="true" name ="ValueLevel_8" [(ngModel)]="levels.valueLevel_8" mask="" (change)="dataChange()"></td>
+                <td><input type="range" calss="clsRangeWT"  name="weight8" max="2" min="0" step="1" [(ngModel)]="levels.weightLevel_8" (change)="dataChange()"></td>
+                <button type="button"  [disabled] = "isEmptyDescription(8)"  name="desc_8" class={{isEmptyDescription_0(8)}} aria-label="settings" (click)="clickLevelDescription(8)">
+                    <clr-icon shape="cog"></clr-icon>
+                  </button>                
+              </tr>
+              <tr>
+                <td><input type="text" class="level" [allowNegativeNumbers]="true" name ="ValueLevel_9" [(ngModel)]="levels.valueLevel_9" mask="" (change)="dataChange()"></td>
+                <td><input type="range" calss="clsRangeWT"  name="weight9" max="2" min="0" step="1" [(ngModel)]="levels.weightLevel_9" (change)="dataChange()"></td>
+                <button type="button"  [disabled] = "isEmptyDescription(9)"  name="desc_9" class={{isEmptyDescription_0(9)}} aria-label="settings" (click)="clickLevelDescription(9)">
+                    <clr-icon shape="cog"></clr-icon>
+                  </button>                
+              </tr>
+              <tr>
+                <td><input type="text" class="level" [allowNegativeNumbers]="true" name ="ValueLevel_10" [(ngModel)]="levels.valueLevel_10" mask="" (change)="dataChange()"></td>
+                <td><input type="range" calss="clsRangeWT"  name="weight10" max="2" min="0" step="1" [(ngModel)]="levels.weightLevel_10" (change)="dataChange()"></td>
+                <button type="button"  [disabled] = "isEmptyDescription(10)"  name="desc_10" class={{isEmptyDescription_0(10)}} aria-label="settings" (click)="clickLevelDescription(10)">
+                    <clr-icon shape="cog"></clr-icon>
+                  </button>                
+              </tr>
+              
+            </tbody>
+          </table>
+    </form>
+
+
+    </div>
+    <div id="Glowny_kontekst_wykres" class="clr-col-8">
+        <div> 
+            <input class="btn btn-sm" type="file" (change)="onChange($event)"> 
+            <button class="btn btn-success btn-sm" (click)="onUpload()"> 
+                Upload 
+            </button> 
+        </div> 
+          
+        <!-- Shareable short link of  uoloaded file -->
+        <div *ngIf="shortLink"> 
+            <h2> Visit Here</h2> 
+            <a href="{{shortLink}}">{{shortLink}}</a> 
+        </div> 
+          
+        <!--Flag variable is used here-->
+        <div *ngIf="loading"> 
+            <span>Loading ...</span> 
+        </div> 
+        
+        <img [src]="selInstrument.imagePath" alt='Please upload chart' width="700" height="500">
+        
+
+    </div>
+  </div>
+
+
+<button class="btn btn-primary " (click) = "onSaveMyInstrument()">Save description stratygy</button>
+
+<textarea id="w3review" name="w3review" rows="15" cols="100%" [(ngModel)]="selInstrument.myDescription">
+  
+</textarea>
+  
+  
+<clr-modal [(clrModalOpen)]="isModalVisibleLevel">
+    <h2 class="modal-title">Level:  {{txtLevelValue}}</h2>
+    <div class="modal-body">
+
+
+              <textarea rows="7" cols="50" [(ngModel)]="txtLevelDescription"></textarea>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="akceptModalLevel()">Save</button>        
+        <button type="button" class="btn btn-outline" (click)="cancelModalLevel()">Cancel</button>
+
+    </div>
+</clr-modal>
+

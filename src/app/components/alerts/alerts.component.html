@@ -1,0 +1,107 @@
+<div class="clr-row">
+    <div class="clr-col-4">
+        <clr-select-container>
+            <label>Chose product:</label>
+            <select clrSelect name="selProduct" [(ngModel)]="selSymbolCode" (change)="OnChangeProduct($event.target.value)">
+                <option *ngFor="let symbol of symbols" value="{{symbol.code}}">{{symbol.name}}</option>
+            </select>    
+        </clr-select-container>
+
+    </div>
+    <div class="clr-col-5">
+        <clr-toggle-container clrInline>
+            <clr-toggle-wrapper>
+              <input type="checkbox" clrToggle value="isMonitoring" name="options" [(ngModel)]="isMonitoring" />
+              <label>Monitoring off/on</label>
+            </clr-toggle-wrapper>
+          
+
+            <clr-toggle-wrapper>
+              <input type="checkbox" clrToggle value="priorytyOnOff" name="priorytyOnOff" [(ngModel)]="priorytyOnOff" />
+              <label>Prioryty -1/-2 off/on</label>
+            </clr-toggle-wrapper>
+        </clr-toggle-container>
+    </div>
+    <div class="clr-col-1">
+        <span class="spinner spinner-md" *ngIf="isPrcessing">
+            Loading...
+        </span>
+        
+    </div>
+    <div class="clr-col-2 txtRight">
+        
+        <a href="..." class="label label-purple clickable">
+            Current CQG scan no
+            <span class="badge">{{currAlert}}</span>
+        </a>        
+    </div>
+</div>
+
+<div class="clr-row" id="row_main">
+    <div class="clr-col-12">
+
+        <clr-datagrid class="datagrid-compact"  >
+            <clr-dg-column >Prioryty</clr-dg-column>
+            <clr-dg-column >Instrument</clr-dg-column>
+            <clr-dg-column >Percent</clr-dg-column>
+            <clr-dg-column >Level #</clr-dg-column>
+
+            <clr-dg-column >Last price</clr-dg-column>
+            <clr-dg-column >Bid</clr-dg-column>
+            <clr-dg-column >Ask</clr-dg-column>
+            <clr-dg-column >Lower level</clr-dg-column>
+            <clr-dg-column >Higher level</clr-dg-column>
+
+            <clr-dg-column >Distance tick</clr-dg-column>
+                
+            <clr-dg-row *clrDgItems="let alert of listAlerts" [clrDgItem]="alert">
+                <clr-dg-cell >{{alert.lp}}</clr-dg-cell>
+                <clr-dg-cell >{{alert.instrument}}</clr-dg-cell>
+                <clr-dg-cell >{{alert.percent}}</clr-dg-cell>                
+                <clr-dg-cell [ngClass]= "{ lred: alert.colorAlert=='B', lgreen: alert.colorAlert=='A' }" >{{alert.levelNo}}</clr-dg-cell>                
+                <clr-dg-cell class="priceValue">{{alert.lastPrice}}</clr-dg-cell>
+                <clr-dg-cell class="priceValue">{{alert.bidPrice}}</clr-dg-cell>
+                <clr-dg-cell class="priceValue">{{alert.oferPrice}}</clr-dg-cell>
+                <clr-dg-cell class="priceValue">{{alert.levelPrice}}</clr-dg-cell>
+                <clr-dg-cell class="priceValue">{{alert.levelPriceNext}}</clr-dg-cell>
+                <clr-dg-cell class="priceValue">{{alert.tickDistance}}</clr-dg-cell>
+
+            </clr-dg-row>
+            <clr-dg-footer>{{listAlerts.length}} alerts</clr-dg-footer>
+
+            <clr-dg-detail *clrIfDetail="let detail">
+                <clr-dg-detail-header>{{detail.instrument}}</clr-dg-detail-header>
+                <clr-dg-detail-body>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Property</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td  class="txtLeft" >Product:</td>
+                                <td class="txtLeft" >{{detail.name}}</td>
+                            </tr>
+                            <tr>
+                                <td  class="txtLeft" >Delivery:</td>
+                                <td  class="txtLeft">{{detail.deliveryMonth}}</td>
+                            </tr>
+                            <tr>
+                                <td  class="txtLeft" >First notice:</td>
+                                <td  class="txtLeft">{{detail.firstNotice}}</td>
+                            </tr>
+                            <tr>
+                                <td  class="txtLeft"> Expiration:</td>
+                                <td  class="txtLeft">{{detail.expiration}}</td>
+                            </tr>
+                        </tbody>
+                    </table>                    
+                </clr-dg-detail-body>
+              </clr-dg-detail>
+        </clr-datagrid>
+        <span class="label label-danger" *ngIf="isError">CQG is not connected !!!</span>
+
+    </div>
+</div>

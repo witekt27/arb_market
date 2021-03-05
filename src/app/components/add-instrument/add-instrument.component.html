@@ -1,0 +1,107 @@
+<clr-radio-container clrInline>
+    <label>Type of instrument</label>
+    <clr-radio-wrapper>
+      <input type="radio" clrRadio name="options" required value="S" [(ngModel)]="selType" (change)="onTypeChange($event.target.value)" />
+      <label>Spread</label>
+    </clr-radio-wrapper>
+    <clr-radio-wrapper>
+      <input type="radio" clrRadio name="options1" required value="O" [(ngModel)]="selType"  (change)="onTypeChange($event.target.value)" />
+      <label>Outrigt</label>
+    </clr-radio-wrapper>
+    <clr-radio-wrapper>
+        <input type="radio" clrRadio name="options2" required value="L" [(ngModel)]="selType"  (change)="onTypeChange($event.target.value)" />
+        <label>Butterfly</label>
+      </clr-radio-wrapper>
+    <clr-control-error>This field is required!</clr-control-error>
+  </clr-radio-container>
+
+
+<table>
+    <tr>
+        <td class = "rowProduct">
+            <clr-select-container>
+                <label>Product</label>
+                        <select clrSelect name="selSymbol" [(ngModel)]="addSymbol" (change)="AddSymbolfilterChanged($event.target.value)">
+                                <option *ngFor="let symbol of symbols" value="{{symbol.code}}">{{symbol.code}}</option>
+                        </select>
+            </clr-select-container>            
+        </td>
+        <td class = "rowSpreadTxt">
+             {{addSpreadTxt}}
+
+        </td>
+        <td class = "rowProduct">
+            <clr-select-container *ngIf = "!isOutright">
+                <label>Spread</label>
+                <select clrSelect name="addSpreed" [(ngModel)]="addSpreed">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                </select>
+            </clr-select-container>                    
+        </td>
+        <td class = "rowProduct">
+            <clr-select-container>
+                <label>Month</label>
+                                <select clrSelect name="selMonth" [(ngModel)]="addMonth">
+                                        <option value="F">F</option>
+                                        <option value="G">G</option>
+                                        <option value="H">H</option>
+                                        <option value="J">J</option>
+                                        <option value="K">K</option>
+                                        <option value="M">M</option>
+                                        <option value="N">N</option>
+                                        <option value="Q">Q</option>
+                                        <option value="U">U</option>
+                                        <option value="V">V</option>
+                                        <option value="X">X</option>
+                                        <option value="Z">Z</option>
+                                    </select>
+        
+            </clr-select-container>                    
+        </td>
+        <td class = "rowProduct">
+            <clr-select-container>
+                <label>Year</label>
+                <select clrSelect name="selYear" [(ngModel)]="addYear">
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                        <option value="25">25</option>
+                    </select>
+                
+            </clr-select-container>                    
+        </td>
+    </tr>
+</table>
+<clr-input-container>
+    <label>First notice:</label>
+    <input clrInput  (change)="onChangeFirsNotice()" name="strFirstNotice" [(ngModel)]="addInstrument.strFirstNotice"/>
+</clr-input-container>
+<clr-input-container>
+    <label>Expiration:</label>
+    <input clrInput  (change)="onChangeFirsNotice()" name="strExpiration" [(ngModel)]="addInstrument.strExpiration"/>
+</clr-input-container>
+
+<button class="btn btn-primary btn-block" (click)="AddNewInstrument()">Add new instrument to portfolio</button>
+
+<span *ngIf="isSaved" class="spinner spinner-inline">
+    Please wait ...
+</span>
+<span class="label label-danger" *ngIf="isMessage">{{txtMessage}}</span>
+
+
+
+
+

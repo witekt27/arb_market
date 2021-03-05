@@ -1,0 +1,15 @@
+.priceValue {
+        text-align: right;
+  }
+  .lgreen {
+        background-color: lightgreen;
+  }
+  .lred {
+      background-color: lightsalmon;
+  }
+  .txtRight {
+      text-align: right;
+}
+.txtLeft {
+      text-align: left;
+}

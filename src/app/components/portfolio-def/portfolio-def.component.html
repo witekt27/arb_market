@@ -1,0 +1,41 @@
+<h2>Define portfolio</h2>
+<clr-datagrid [(clrDgSingleSelected)]="selected" [clrDgRowSelection]="true">
+    <clr-dg-column >#</clr-dg-column>
+    <clr-dg-column >Name</clr-dg-column>
+    <clr-dg-column >Descriptopn</clr-dg-column>
+    <clr-dg-column >Active</clr-dg-column>
+
+
+    <clr-dg-row *clrDgItems="let portfolio of portfolios" [clrDgItem]="portfolio">
+        <clr-dg-cell >{{portfolio.id}}</clr-dg-cell>
+        <clr-dg-cell >{{portfolio.name}}</clr-dg-cell>
+        <clr-dg-cell >{{portfolio.description}}</clr-dg-cell>
+        <clr-dg-cell >
+            <input type="checkbox" name="options" value="option1" [checked] = "portfolio.active" disabled clrCheckbox />            
+        </clr-dg-cell>
+
+    </clr-dg-row>
+
+    <clr-dg-footer>{{portfolios.length}} portfolio</clr-dg-footer>
+</clr-datagrid>
+
+<div >
+<form clrForm *ngIf="selected" clrLayout="horizontal" (ngSubmit)="save()" >
+    <clr-input-container>
+        <label>Portfilio name</label>        
+        <input type="text" name="name" clrInput placeholder="Enter portfolio name" [(ngModel)]="selected.name" required/>
+    </clr-input-container>
+    <clr-input-container>
+        <label>Description</label>        
+        <input type="text" name="description" clrInput placeholder="Enter portfolio description" [(ngModel)]="selected.description" required/>
+    </clr-input-container>
+    <br>
+    <clr-checkbox-wrapper>
+        <label>Set active portfolio</label>
+        <input type="checkbox" name="active" clrCheckbox  [(ngModel)]="selected.active"/>
+    </clr-checkbox-wrapper>
+    <br>
+    <button type="submit" class="btn btn-primary">Save</button>
+
+</form>
+</div>

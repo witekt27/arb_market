@@ -1,0 +1,50 @@
+
+<div class="main-container">
+  <header class="header header-4">
+    <div class="branding">
+        <a href="..." class="nav-link">
+            
+            <span class="title">ARB-TG Alerts </span>
+        </a>
+    </div>
+    <div class="header-actions">
+        <clr-dropdown>
+            <button class="nav-text" clrDropdownTrigger aria-label="open user profile">
+                {{user?.trader}}
+                <clr-icon shape="caret down"></clr-icon>
+            </button>
+            <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+                <a href="..." clrDropdownItem>Preferences</a>
+                <a href="/logout" clrDropdownItem>Log out</a>
+            </clr-dropdown-menu>
+        </clr-dropdown>
+    </div>
+  </header>
+  <div class="content-container">
+      <nav class="sidenav" style="width: 180px;">
+          <section class="sidenav-content" style="width: 180px;">
+              <section class="nav-group collapsible">
+                  <input id="tabexample1" type="checkbox">
+                  <label for="tabexample1">Market</label>
+                  <ul class="nav-list">
+                        <li><a href="alert" class="nav-link">Alerts</a></li>
+                      <li><a href="market" class="nav-link">My portfolio</a></li>
+                      <li><a href="instruments" class="nav-link">Instruments</a></li>
+
+                  </ul>
+              </section>
+              <section class="nav-group" *ngIf="isAdmin">
+                  <input id="tabexample2" type="checkbox">
+                  <label for="tabexample2">Admin</label>
+                  <ul class="nav-list">
+                      <li><a *ngFor="let menusingle of navArrayAdmin" class="nav-link" href="{{menusingle.menuLink}}">{{menusingle.menumenuName}}</a></li>
+                  </ul>
+              </section>
+          </section>
+      </nav>
+
+      <div class="content-area">
+         <router-outlet></router-outlet>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<table>
+    <tr>
+        <td>
+            <clr-select-container>
+                <label>Chose product:</label>
+                <select clrSelect name="selProduct" [(ngModel)]="selSymbolCode" (change)="OnChangeProduct($event.target.value)">
+                    <option *ngFor="let symbol of symbols" value="{{symbol.code}}">{{symbol.name}}</option>
+                </select>    
+            </clr-select-container>
+        </td>
+        <td style="margin-left: 400px;">
+            <button class="btn btn-primary btn-sm" (click)="onDeleteProduct()">Delete from portfolio</button>
+</td>   
+    </tr>
+</table>
+
+<div class="clr-row">
+    <div class="clr-col-2">
+
+        <clr-datagrid class="datagrid-compact" [(clrDgSingleSelected)]="selInstrument" [clrDgRowSelection]="true" (clrDgSingleSelectedChange)="onChangeMainTab($event)">
+            <clr-dg-pagination #pagination [clrDgPageSize]="50">
+                <clr-dg-page-size [clrPageSizeOptions]="[50,100,150,200]">per page</clr-dg-page-size>
+                {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} users
+              </clr-dg-pagination>
+
+            <clr-dg-column >Instrument</clr-dg-column>
+
+                
+            <clr-dg-row *clrDgItems="let instrument of instruments" [clrDgItem]="instrument">
+
+                <clr-dg-cell >{{instrument.instrument}}</clr-dg-cell>
+
+            </clr-dg-row>
+
+            <clr-dg-footer>{{instruments.length}} instruments</clr-dg-footer>
+        </clr-datagrid>
+
+
+    </div>
+    <div class="clr-col-10">
+        <app-matekt-details [selInstrument] = "selInstrument"></app-matekt-details>
+    </div>
+  </div>
+
+  <clr-modal [(clrModalOpen)]="isModalVisibleRemove">
+    <h3 class="modal-title">{{selInstrument.instrument}}</h3>
+    <div class="modal-body">
+        <p>Remove instrument from my portfolio?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="cancelRemoveLevels()">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="akceptRemoveLevels()">Remove</button>
+    </div>
+  </clr-modal>

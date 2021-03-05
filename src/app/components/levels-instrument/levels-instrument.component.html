@@ -1,0 +1,72 @@
+<div class="clr-row">
+    <div class="clr-col-4">
+        <clr-datagrid [(clrDgSingleSelected)]="selSymbol" [clrDgRowSelection]="true" (clrDgSingleSelectedChange)="selectedChanged($event)">
+            <clr-dg-column >Symbol</clr-dg-column>
+            <clr-dg-row *clrDgItems="let s of symbols" [clrDgItem]="s">
+                <clr-dg-cell >{{s.code}}</clr-dg-cell>
+
+            </clr-dg-row>
+        </clr-datagrid>
+    </div>
+
+
+    <div class="clr-col-8">
+        <span>spredy</span>
+    </div>
+</div>
+<br>
+<hr>
+<label>Add new spreed&nbsp;</label>
+<span class="label label-light-blue">{{selSymbol?.code}}</span>
+<span class="label label-light-blue">{{selSymbol?.name}}</span>
+<div class="clr-row">
+    <div class="clr-col-2">
+        <select clrSelect name="selSpreed" [(ngModel)]="selSpreed">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+
+    </div>
+    <div class="clr-col-2">
+        <select clrSelect name="selMonth" [(ngModel)]="selMonth">
+            <option value="F">F</option>
+            <option value="G">G</option>
+            <option value="H">H</option>
+            <option value="J">J</option>
+            <option value="K">K</option>
+            <option value="M">M</option>
+            <option value="N">N</option>
+            <option value="Q">Q</option>
+            <option value="U">U</option>
+            <option value="V">V</option>
+            <option value="X">X</option>
+            <option value="Z">Z</option>
+
+        </select>
+
+    </div>
+    <div class="clr-col-2">
+        <select clrSelect name="selYear" [(ngModel)]="selYear">
+            <option value="20">20</option>
+            <option value="21">21</option>
+            <option value="22">22</option>
+            <option value="23">23</option>
+            <option value="24">24</option>
+            <option value="25">25</option>
+        </select>
+    </div>
+    <div class="clr-col-2">
+
+            <button class="btn btn-primary">Add spread =></button>
+
+    </div>
+</div>
+

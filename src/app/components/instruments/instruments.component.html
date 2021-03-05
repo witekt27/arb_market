@@ -1,0 +1,115 @@
+<div class="clr-row">
+    <div class="clr-col-12">
+        <div class="clr-row">
+            <div class="clr-col-3" *ngIf="isAdmin">
+            <clr-select-container>
+                <label>Chose portfolio:</label>
+                <select clrSelect name="selPortfolioNo" [(ngModel)]="selPortfolioNo" (change)="OnChangePortfolio($event.target.value)">
+                    <option *ngFor="let portfolio of portfolios" value="{{portfolio.id}}">{{portfolio.name}}</option>
+                </select>    
+            </clr-select-container>
+            </div>
+            <div class="clr-col-3">
+            <clr-select-container>
+                <label>Chose product:</label>
+                <select clrSelect name="selProduct" [(ngModel)]="selSymbolCode" (change)="OnChangeProduct($event.target.value)">
+                    <option *ngFor="let symbol of symbols" value="{{symbol.code}}">{{symbol.name}}</option>
+                </select>    
+            </clr-select-container>
+            </div>
+            <div class="clr-col-3" *ngIf="isAdmin">
+            <clr-checkbox-wrapper>
+                <label>Only active instrument</label>
+                    <input type="checkbox" name="active" [(ngModel)]="selActivityOnly" (change)="OnChangeActiviteOnly($event.target.value)" clrCheckbox />
+            </clr-checkbox-wrapper>
+            </div>
+            <div class="clr-col-3">
+                <button class="btn btn-primary" *ngIf="isChenged" (click)="OnMainSave()">Save changes</button>
+            </div>
+    
+        </div>
+    </div>
+</div>
+<div class="clr-row">
+    <div class="clr-col-12">
+        <clr-datagrid [(clrDgSingleSelected)]="selInstrument" [clrDgRowSelection]="true" >
+            <clr-dg-column >Product</clr-dg-column>
+            <clr-dg-column >Instrument</clr-dg-column>
+            <clr-dg-column >Delivery</clr-dg-column>
+            <clr-dg-column >First notice</clr-dg-column>
+            <clr-dg-column >Expiration</clr-dg-column>
+            <clr-dg-column >Tick size</clr-dg-column>
+            <clr-dg-column >Active</clr-dg-column>
+            <clr-dg-column >Add to portfolio</clr-dg-column>
+            <clr-dg-column >Is changed</clr-dg-column>
+                
+            <clr-dg-row *clrDgItems="let instrument of instruments" [clrDgItem]="instrument">
+                <clr-dg-cell >{{instrument.name}}</clr-dg-cell>
+                <clr-dg-cell >{{instrument.instrument}}</clr-dg-cell>
+                <clr-dg-cell >{{instrument.deliveryMonth}}</clr-dg-cell>
+                <clr-dg-cell >{{instrument.strFirstNotice}}</clr-dg-cell>
+                <clr-dg-cell >{{instrument.strExpiration }}</clr-dg-cell>
+                <clr-dg-cell >{{instrument.tickSize }}</clr-dg-cell>
+                <clr-dg-cell >
+                    <input type="checkbox" name="options" value="option1" [checked] = "instrument.active" disabled clrCheckbox />            
+                </clr-dg-cell>
+
+                <clr-dg-cell >
+                    <a *ngIf="instrument.myPortfolioId===0" class="label label-light-blue clickable" (click)="AddMyPortfolio($event, instrument)">Add to portfolio</a>
+                </clr-dg-cell>
+
+                <clr-dg-cell >
+                    <input type="checkbox"  name="isChanged" value="option1" [checked] = "instrument.changed" disabled clrCheckbox />            
+                </clr-dg-cell>
+
+
+            </clr-dg-row>
+            <ng-template clrIfDetail let-detail (clrIfDetailChange)="onDetailOpen($event)">
+                <clr-dg-detail>
+                  <clr-dg-detail-header>{{selInstrument.instrument}}</clr-dg-detail-header>
+                    
+                  <clr-dg-detail-body>
+                    <form clrForm clrForm #simpleForm="ngForm" *ngIf="isAdmin">
+                            <hr>
+                            <clr-input-container>
+                                <label>First notice:</label>
+                                <input clrInput  (change)="onChangeFirsNotice()" name="strFirstNotice" [(ngModel)]="selInstrument.strFirstNotice"/>
+                            </clr-input-container>
+                            <clr-input-container>
+                                <label>Expiration:</label>
+                                <input clrInput  (change)="onChangeFirsNotice()" name="strExpiration" [(ngModel)]="selInstrument.strExpiration"/>
+                            </clr-input-container>
+                            <br>
+                            <clr-checkbox-wrapper>
+                                <label>Set as active </label>
+                                <input type="checkbox" name="active" clrCheckbox  [(ngModel)]="selInstrument.active"/>
+                            </clr-checkbox-wrapper>
+                            <clr-select-container>
+                                <label>Move to other portfolio:</label>
+                                <select clrSelect name="movePortfolioNo" [(ngModel)]="selInstrument.portfolioId" (change)="onChangeFirsNotice()">
+                                    <option *ngFor="let portfolio of portfolios" value="{{portfolio.id}}">{{portfolio.name}}</option>
+                                </select>    
+                            </clr-select-container>
+                
+                            <hr>
+                     </form>
+                                            
+                  </clr-dg-detail-body>
+                </clr-dg-detail>
+              </ng-template>        
+
+            <clr-dg-footer>{{instruments.length}} instruments</clr-dg-footer>
+        </clr-datagrid>
+        
+    </div>
+
+</div>
+
+<div class="clr-row" *ngIf="isAdmin" >
+    <!-- Dodawanie nowych instrumentów do protfolio -->
+    <div class="clr-col-6">
+        <app-add-instrument [symbols] = "symbols" [addSymbol] = "selInstrument.symbol" (onRefresh)="newPositionEvent($event)"> </app-add-instrument>
+    </div>
+    <div class="clr-col-6">
+       
+</div>

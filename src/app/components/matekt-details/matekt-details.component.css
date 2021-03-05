@@ -1,0 +1,47 @@
+.class1_header_save {
+  display: inline-block;
+  
+  font-size: smaller;
+}
+.class1_header {
+    display: inline-block;
+    height: 25px;
+    font-size: smaller;
+}
+.class1_instrument {
+    width: 70px;
+}
+.class1_name {
+    width: 190px;
+}
+
+.class1_upload {
+    display: inline-block;
+    background-color: aqua;
+    width: 100px;
+    height: 100px;
+}
+
+.level {
+    background-color: rgb(225, 247, 247);
+    font-size: 9pt;
+    height: 20px;
+    width: 75px; 
+    text-align: right;
+  
+  };
+.clsRangeWT{
+  width: 80px;
+  margin-top: 0px;
+  padding-top: 0px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+
+}
+.clsRowWT{
+  height: 30px;
+}
+.levelDesctiption{
+  width: 600;
+  height: 450;
+}
