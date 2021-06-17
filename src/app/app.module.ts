@@ -14,7 +14,7 @@ import { AppComponent } from './app.component';
 import { ClarityModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { ExchangesComponent } from './components/exchanges/exchanges.component';
+
 import {StatConnectionService} from './services/stat-connection.service';
 import {InstrumentDefService} from './services/instrument-def.service';
 import {ApiSymbolsService} from './services/api-symbols.service';
@@ -39,7 +39,7 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
   declarations: [
     AppComponent,
 
-    ExchangesComponent,
+
     AlertComponent,
     LoginComponent,
     PortfolioDefComponent,

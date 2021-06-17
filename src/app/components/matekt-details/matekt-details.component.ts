@@ -298,19 +298,19 @@ onUpload() {
   this.txtLevelDescription = this.selInstrument.imagePath;
   this.selInstrument.imagePath = '';
   this.fileDestnation = this.selInstrument.instrument + '_' + this.authenticationService.currentUserValue.account + '.png';
-  this.fileUploadService.setFileName(this.fileDestnation).subscribe(
+  this.fileUploadService.setFileName(this.fileDestnation, this.selInstrument.myPortfolioId).subscribe(
       (stat: any) => {
-          if (stat === 'OK') {
-            this.fileUploadService.upload(this.file).subscribe(
-              (event: any) => {
-                  if (typeof (event) === 'object') {
-                      this.shortLink = event.link;
-                      this.loading = false; // Flag variable
-                      this.selInstrument.imagePath = this.txtLevelDescription;
-                  }
-              }
+          this.fileUploadService.upload(this.file).subscribe(
+            (event: any) => {
+                if (typeof (event) === 'object') {
+                    this.shortLink = event.link;
+                    this.loading = false; // Flag variable
+                    this.selInstrument.imagePath = stat;
+                    this.selInstrument.imageVersion = this.selInstrument.imageVersion + 1;
+                }
+            }
           );
-          }
+
       }
   );
 }

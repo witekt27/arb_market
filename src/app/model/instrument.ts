@@ -20,4 +20,5 @@ export class Instrument {
     myDescription: string;
     type: string;
     imagePath: string;
+    imageVersion: number;
 }

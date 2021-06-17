@@ -115,12 +115,21 @@
 
     </div>
     <div id="Glowny_kontekst_wykres" class="clr-col-8">
-        <div> 
-            <input class="btn btn-sm" type="file" (change)="onChange($event)"> 
-            <button class="btn btn-success btn-sm" (click)="onUpload()"> 
-                Upload 
-            </button> 
-        </div> 
+        <table>
+          <tr>
+            <td>
+              <div> 
+                  <input class="btn btn-sm" type="file" (change)="onChange($event)"> 
+                  <button class="btn btn-success btn-sm" (click)="onUpload()"> 
+                      Upload 
+                  </button> 
+              </div>
+            </td>
+            <td>
+              No chart version: {{selInstrument.imageVersion}}
+            </td>
+          </tr>
+        </table>
           
         <!-- Shareable short link of  uoloaded file -->
         <div *ngIf="shortLink"> 

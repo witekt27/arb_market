@@ -20,8 +20,8 @@ export class UploadService {
       return this.http.post(this.url, formData);
   }
 
-  setFileName(fileName: string) {
-    return this.http.get(this.url + '?_chart=' + fileName);
+  setFileName(fileName: string, MyPortfolioId: number) {
+    return this.http.get(this.url + '?_chart=' + fileName + '&portfolioid=' + MyPortfolioId);
     }
 
 
