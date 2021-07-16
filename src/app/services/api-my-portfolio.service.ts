@@ -4,6 +4,8 @@ import {ConfigService} from 'src/app/services/config-service.service';
 import {Instrument} from 'src/app/model/instrument';
 import {Levels} from 'src/app/model/levels';
 import {Alerts} from 'src/app/model/alerts';
+import {Signal} from 'src/app/model/signal.model';
+
 
 @Injectable({
   providedIn: 'root'
@@ -89,4 +91,26 @@ body: any;
     return this.http.delete(this.urlParam, this.body);
   }
 
+  UpdateMyPorfolioOnOff(portfolioId, active){
+
+    // tslint:disable-next-line:max-line-length
+    this.urlParam = ConfigService.get('api') + 'MyPortfolio?portfolioId=' + portfolioId + '&description=NULL'  + '&active=' + active ;
+    return this.http.put(this.urlParam, this.body);
+  }
+
+  getCurrentSignal(traderId) {
+    this.urlParam = ConfigService.get('api') + 'CurrentSignal?_traderId=' + traderId;
+
+    return this.http.get<Array<Signal>>(this.urlParam);
+    }
+
+  getSignal(traderId) {
+      this.urlParam = ConfigService.get('api') + 'Signal?_traderId=' + traderId;
+      return this.http.get<Array<Signal>>(this.urlParam);
+      }
+  unSetNewSignal(traderId, _id) {
+        this.urlParam = ConfigService.get('api') + 'Signal?_traderId=' + traderId + '&_id=' + _id;
+        return this.http.get<Array<Signal>>(this.urlParam);
+        }
+  
 }

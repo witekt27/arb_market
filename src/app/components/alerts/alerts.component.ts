@@ -5,7 +5,7 @@ import {AuthenticationService} from 'src/app/_services/authentication.service';
 import {ApiMyPortfolioService} from 'src/app/services/api-my-portfolio.service';
 import {Symbol} from 'src/app/model/symbol';
 import {ApiSymbolsService} from 'src/app/services/api-symbols.service';
-
+import {Signal} from 'src/app/model/signal.model';
 
 @Component({
   selector: 'app-alerts',
@@ -23,12 +23,18 @@ symbols: Array<Symbol>;
 selSymbol: Symbol;
 selSymbolCode: string;
 listAlerts: Array<Alerts>;
+listCurrentSignal: Array<Signal>;
+listSignal: Array<Signal>;
+selSignal: Signal;
 
 prevAlert: number;
 currAlert: number;
 lossAlert: number;
 
 timer = interval(15000);
+
+audioObj = new Audio();
+
 private sub: Subscription;
 
   count = 0;
@@ -62,6 +68,13 @@ private sub: Subscription;
       this.GetNoAlerts();
     }
     });
+    this.svrMyPortfolio.getSignal(this.traderId).subscribe((datasighist: any) => {
+      this.listSignal = datasighist;
+      if (this.listSignal.length > 0 ){
+        this.selSignal = this.listSignal[0];
+      }
+    });
+
   }
   // tslint:disable-next-line:use-lifecycle-interface
   ngOnDestroy(){
@@ -101,12 +114,36 @@ private sub: Subscription;
     this.svrMyPortfolio.getAlertsForTrader(this.traderId, this.priorytyOnOff, this.selSymbolCode).subscribe((data: any) => {
       this.listAlerts = data;
       this.isPrcessing = false;
+      // Czy są sygnały?
+      this.svrMyPortfolio.getCurrentSignal(this.traderId).subscribe((datasig: any) => {
+        this.listCurrentSignal = datasig;
+        if (this.listCurrentSignal.length > 0){  //Pojawiłay się nowe sygnały, trzeba historię pobrać
+          this.audioObj.src = './assets/ding01.wav';
+          this.audioObj.load();
+          this.audioObj.play();
+
+          this.svrMyPortfolio.getSignal(this.traderId).subscribe((datasighist: any) => {
+            this.listSignal = datasighist;
+          });
+        }
+      });
+
     });
   }
 
   OnChangeProduct(value){
     this.isError = false;
     this.GetAlertsForTrader();
+  }
+
+  clickSelSignal(xx){
+    this.selSignal = xx;
+    if (this.selSignal.newSignal){
+
+      this.svrMyPortfolio.unSetNewSignal(this.traderId, this.selSignal.id).subscribe((d1: any) => {
+        this.selSignal.newSignal = false;
+      });
+    }
   }
 
 }

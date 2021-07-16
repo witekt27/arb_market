@@ -9,6 +9,7 @@ import {InstrumentsComponent} from 'src/app/components/instruments/instruments.c
 import {AlertsComponent} from 'src/app/components/alerts/alerts.component';
 
 import {MarketListComponent} from 'src/app/components/market-list/market-list.component';
+import {Test01Component} from 'src/app/components//test01/test01.component';
 
 
 
@@ -19,6 +20,8 @@ const routes: Routes = [
   {path: 'instruments', component: InstrumentsComponent},
   {path: 'alert', component: AlertsComponent},
   {path: 'market', component: MarketListComponent},
+  {path: 'test', component: Test01Component},
+
   {path: 'levels', component: LevelsDefComponent}
 
 ];

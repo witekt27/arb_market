@@ -33,6 +33,7 @@ import { AddInstrumentComponent } from './components/add-instrument/add-instrume
 import { MarketListComponent } from './components/market-list/market-list.component';
 import { MatektDetailsComponent } from './components/matekt-details/matekt-details.component';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { Test01Component } from './components/test01/test01.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
     AlertsComponent,
     AddInstrumentComponent,
     MarketListComponent,
-    MatektDetailsComponent
+    MatektDetailsComponent,
+    Test01Component
 
   ],
   imports: [

@@ -3,38 +3,40 @@
         <td>
             <clr-select-container>
                 <label>Chose product:</label>
-                <select clrSelect name="selProduct" [(ngModel)]="selSymbolCode" (change)="OnChangeProduct($event.target.value)">
+                <select clrSelect name="selProduct" [(ngModel)]="selSymbolCode"
+                 (change)="OnChangeProduct($event.target.value)">
                     <option *ngFor="let symbol of symbols" value="{{symbol.code}}">{{symbol.name}}</option>
                 </select>    
             </clr-select-container>
         </td>
         <td style="margin-left: 400px; padding-left: 300px;" >
             <button class="btn btn-primary btn-sm" (click)="onDeleteProduct()">Delete from portfolio</button>
-</td>   
+        </td>   
     </tr>
 </table>
 
 <div class="clr-row">
-    <div class="clr-col-2">
+    <div class="clr-col-2" style="width: 60px;">
+        <clr-datagrid class="datagrid-compact" style="width: 200px;">
 
-        <clr-datagrid class="datagrid-compact" [(clrDgSingleSelected)]="selInstrument" [clrDgRowSelection]="true" (clrDgSingleSelectedChange)="onChangeMainTab($event)">
             <clr-dg-pagination #pagination [clrDgPageSize]="50">
                 <clr-dg-page-size [clrPageSizeOptions]="[50,100,150,200]">per page</clr-dg-page-size>
-                {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} users
+                
               </clr-dg-pagination>
 
-            <clr-dg-column >Instrument</clr-dg-column>
+            <clr-dg-column class="width1">Instrument</clr-dg-column>
+            <clr-dg-column class="width2">On</clr-dg-column>
 
                 
-            <clr-dg-row *clrDgItems="let instrument of instruments" [clrDgItem]="instrument">
+            <clr-dg-row *clrDgItems="let instrument of instruments" [clrDgItem]="instrument" (click)="clickOnRow(instrument)" [clrDgSelected]="selInstrument == instrument">
 
                 <clr-dg-cell >{{instrument.instrument}}</clr-dg-cell>
-
+                <clr-dg-cell ><input type="checkbox" clrToggle value="isInAltert" name="options" [(ngModel)]="instrument.active" 
+                    (click)= 'clickOnOffAlert()'/></clr-dg-cell>
             </clr-dg-row>
 
-            <clr-dg-footer>{{instruments.length}} instruments</clr-dg-footer>
-        </clr-datagrid>
 
+        </clr-datagrid>
 
     </div>
     <div class="clr-col-10">

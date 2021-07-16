@@ -1,0 +1,54 @@
+<clr-tabs>
+  <clr-tab>
+    <button clrTabLink>Alerts</button>
+    <clr-tab-content *clrIfActive="true">
+
+
+      <div class="alert alert-info" role="alert">
+        <div class="alert-items">
+          <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+      
+            </div>
+            <span class="alert-text">
+              {{Alert1}}
+            </span>
+          </div>
+        </div>
+      </div>
+
+    </clr-tab-content>
+  </clr-tab>
+  <clr-tab>
+    <button clrTabLink>Products list</button>
+    <clr-tab-content>
+      Management content
+    </clr-tab-content>
+  </clr-tab>
+</clr-tabs>
+
+
+
+<clr-main-container>
+    <div class="content-container">
+      <div class="content-area">
+        <clr-datagrid>
+            <clr-dg-column>User ID</clr-dg-column>
+            <clr-dg-column>First name</clr-dg-column>
+            <clr-dg-column>Last name</clr-dg-column>
+        
+            <clr-dg-row *ngFor="let user of users" (click)="click2((selected === user ? null : user))" [clrDgSelected]="selected == user">
+                <clr-dg-cell>{{user.id}}</clr-dg-cell>
+                <clr-dg-cell>{{user.firstname}}</clr-dg-cell>
+                <clr-dg-cell>{{user.lasttname}}</clr-dg-cell>
+                <clr-dg-cell><input type="checkbox" clrToggle value="isInAltert" name="options" [(ngModel)]="user.active" (click)="clik1(user)"/></clr-dg-cell>
+            </clr-dg-row>
+        
+            <clr-dg-footer>{{users.length}} users</clr-dg-footer>
+        </clr-datagrid>
+        
+        <h4 *ngIf="selected">Currently selected: {{selected.firstname}} {{selected.lastname}}</h4>
+      </div>
+    </div>
+</clr-main-container>
+

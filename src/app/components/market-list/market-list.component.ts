@@ -12,6 +12,8 @@ import { IfActiveService } from '@clr/angular/utils/conditional/if-active.servic
 import {AuthenticationService} from 'src/app/_services/authentication.service';
 import {ApiMyPortfolioService} from 'src/app/services/api-my-portfolio.service';
 
+//import {sound} from 'node_modules/sound-play';
+
 
 @Component({
   selector: 'app-market-list',
@@ -32,6 +34,9 @@ export class MarketListComponent implements OnInit {
   selPortfolioId: number;
   selPosition = 0;
   isModalVisibleRemove = false;
+  isInAltert = true;
+
+  //audioObj = new Audio();
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -40,7 +45,10 @@ export class MarketListComponent implements OnInit {
     private svrPortfolio: DefPortfolioService,
     private svrMyPortfolio: ApiMyPortfolioService
 
+
   ) {
+
+
     this.selSymbolCode = 'ALL';
     if (this.authenticationService.currentUserValue) {
       this.isAdmin = this.authenticationService.currentUserValue.isAdmin;
@@ -49,6 +57,10 @@ export class MarketListComponent implements OnInit {
    }
 
    ngOnInit(): void {
+     //this.audioObj.src = './assets/ding01.wav';
+    //this.audioObj.load();
+    //this.audioObj.play();
+
     this.svrSymbols.getSymbolsCode(0).subscribe((data: any) => {
       this.symbols = data;
       this.selSymbol = this.symbols[0];
@@ -57,23 +69,13 @@ export class MarketListComponent implements OnInit {
   }
   GetListInstrument(): void
   {
-
     // tslint:disable-next-line:max-line-length
     this.svrMyPortfolio.getInstrument(this.traderId, this.selSymbolCode).subscribe((data: any) => {
       this.instruments = data;
       this.selInstrument = this.instruments[0];
       this.selInstrumentId = this.selInstrument.instrumentID;
       this.selPortfolioId = this.selInstrument.myPortfolioId;
-      //this.saveDescription = this.selInstrument.myDescription;
-      //this.getLevels();
-
     });
-  }
-
-  OnChangeProduct(selected){
-    this.selSymbolCode = selected;
-    this.selPosition = 0;
-    this.GetListInstrument();
   }
   onChangeMainTab(akcja){
     // --- Zmiana instrumentu, co z niezapisanym
@@ -91,8 +93,24 @@ export class MarketListComponent implements OnInit {
       this.isModalVisibleRemove = false;
       this.GetListInstrument();
     });
-
-
   }
 
+
+  OnChangeProduct(selected){
+    this.selSymbolCode = selected;
+    this.selPosition = 0;
+    this.GetListInstrument();
+  }
+
+  clickOnRow(insSelected){
+    if (insSelected !== null) {
+      this.selInstrument = insSelected;
+    }
+  }
+
+  clickOnOffAlert() {
+    this.svrMyPortfolio.UpdateMyPorfolioOnOff(this.selInstrument.myPortfolioId, this.selInstrument.active).subscribe((data: any) => {
+    });
+
+  }
 }

@@ -31,6 +31,7 @@
     "mobx-angular": "^4.1.0",
     "ngx-mask": "^10.0.4",
     "rxjs": "~6.5.4",
+    "sound-play": "^1.1.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },
