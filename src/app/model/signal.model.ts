@@ -8,4 +8,5 @@ export class Signal {
     levelNo: string;
     colorAlert: string;
     levelCurrentPrice: string;
+    dateSignal: string;
 }

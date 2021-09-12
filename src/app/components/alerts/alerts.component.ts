@@ -6,6 +6,7 @@ import {ApiMyPortfolioService} from 'src/app/services/api-my-portfolio.service';
 import {Symbol} from 'src/app/model/symbol';
 import {ApiSymbolsService} from 'src/app/services/api-symbols.service';
 import {Signal} from 'src/app/model/signal.model';
+import { isProtractorLocator } from 'protractor/built/locators';
 
 @Component({
   selector: 'app-alerts',
@@ -19,7 +20,9 @@ isPrcessing: boolean;
 isError: boolean;
 priorytyOnOff: boolean;
 traderId: number;
+// tslint:disable-next-line:ban-types
 symbols: Array<Symbol>;
+// tslint:disable-next-line:ban-types
 selSymbol: Symbol;
 selSymbolCode: string;
 listAlerts: Array<Alerts>;
@@ -53,6 +56,7 @@ private sub: Subscription;
     this.lossAlert = 0;
     this.isError = false;
     this.priorytyOnOff = true;
+    this.isPrcessing = true;
     this.svrSymbols.getSymbolsCode(0).subscribe((data: any) => {
       this.symbols = data;
       this.selSymbol = this.symbols[0];
@@ -84,7 +88,6 @@ private sub: Subscription;
 
   GetNoAlerts(): void
   {
-
     // tslint:disable-next-line:max-line-length
     this.isPrcessing = true;
     this.svrMyPortfolio.getNoAlerts(this.traderId).subscribe((data: any) => {
@@ -100,9 +103,10 @@ private sub: Subscription;
         this.isError = false;
         this.lossAlert = 0;
         this.prevAlert = this.currAlert;
+        this.isPrcessing = false;
         this.GetAlertsForTrader();
       }
-      this.isPrcessing = false;
+
     });
   }
 
@@ -117,7 +121,7 @@ private sub: Subscription;
       // Czy są sygnały?
       this.svrMyPortfolio.getCurrentSignal(this.traderId).subscribe((datasig: any) => {
         this.listCurrentSignal = datasig;
-        if (this.listCurrentSignal.length > 0){  //Pojawiłay się nowe sygnały, trzeba historię pobrać
+        if (this.listCurrentSignal.length > 0){  // Pojawiłay się nowe sygnały, trzeba historię pobrać
           this.audioObj.src = './assets/ding01.wav';
           this.audioObj.load();
           this.audioObj.play();
