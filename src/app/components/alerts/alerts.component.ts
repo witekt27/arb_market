@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {interval, timer, Subscription} from 'rxjs';
 import {Alerts} from 'src/app/model/alerts';
+import {Signal} from 'src/app/model/signal.model';
+import {Symbol} from 'src/app/model/symbol';
+
 import {AuthenticationService} from 'src/app/_services/authentication.service';
 import {ApiMyPortfolioService} from 'src/app/services/api-my-portfolio.service';
-import {Symbol} from 'src/app/model/symbol';
 import {ApiSymbolsService} from 'src/app/services/api-symbols.service';
-import {Signal} from 'src/app/model/signal.model';
+
 import { isProtractorLocator } from 'protractor/built/locators';
 
 @Component({

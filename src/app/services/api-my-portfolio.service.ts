@@ -32,9 +32,7 @@ body: any;
   {
     // tslint:disable-next-line:ban-types
     this.urlParam = ConfigService.get('api') + 'Levels?traderId=' + traderId + '&active=' + active + '&selSymbol=' + selSymbol;
-
     return this.http.get<Array<Alerts>>(this.urlParam);
-
   }
 
   getInstrument(traderId, symbol) {
@@ -108,9 +106,9 @@ body: any;
       this.urlParam = ConfigService.get('api') + 'Signal?_traderId=' + traderId;
       return this.http.get<Array<Signal>>(this.urlParam);
       }
+
   unSetNewSignal(traderId, _id) {
         this.urlParam = ConfigService.get('api') + 'Signal?_traderId=' + traderId + '&_id=' + _id;
         return this.http.get<Array<Signal>>(this.urlParam);
         }
-  
 }
